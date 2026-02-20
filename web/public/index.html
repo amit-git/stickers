@@ -554,6 +554,246 @@
       flex: 1;
     }
 
+    /* ── Cart Button (header) ──────────────────────────────────────────────── */
+    .cart-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      color: var(--charcoal);
+      flex-shrink: 0;
+      transition: background var(--transition), color var(--transition);
+    }
+    .cart-btn:hover { background: var(--blush); color: var(--deep-rose); }
+    .cart-badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      min-width: 17px;
+      height: 17px;
+      padding: 0 4px;
+      border-radius: 999px;
+      background: var(--dusty-rose);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 17px;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    /* ── Cart Drawer ───────────────────────────────────────────────────────── */
+    .cart-drawer {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      pointer-events: none;
+    }
+    .cart-drawer.open { pointer-events: all; }
+    .cart-drawer-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      opacity: 0;
+      transition: opacity 0.25s;
+    }
+    .cart-drawer.open .cart-drawer-backdrop { opacity: 1; }
+    .cart-panel {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 380px;
+      max-width: 100vw;
+      background: var(--warm-white);
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      box-shadow: var(--shadow-lg);
+    }
+    .cart-drawer.open .cart-panel { transform: translateX(0); }
+
+    .cart-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .cart-heading {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: var(--charcoal);
+    }
+    .cart-close-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: var(--mid-gray);
+      transition: background var(--transition), color var(--transition);
+    }
+    .cart-close-btn:hover { background: var(--blush); color: var(--deep-rose); }
+
+    /* Cart items list */
+    .cart-items {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px 20px;
+    }
+    .cart-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      height: 100%;
+      color: var(--mid-gray);
+      text-align: center;
+    }
+    .cart-empty svg { opacity: 0.35; }
+    .cart-empty p { font-size: 14px; }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 68px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-item:last-child { border-bottom: none; }
+    .cart-item-img {
+      width: 68px;
+      height: 68px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      background: var(--light-gray);
+      flex-shrink: 0;
+    }
+    .cart-item-info { min-width: 0; }
+    .cart-item-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--charcoal);
+      line-height: 1.35;
+      margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .cart-item-price {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--deep-rose);
+      margin-bottom: 6px;
+    }
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .qty-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: var(--warm-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      line-height: 1;
+      color: var(--charcoal);
+      transition: border-color var(--transition), background var(--transition);
+      flex-shrink: 0;
+    }
+    .qty-btn:hover { border-color: var(--rose); background: var(--blush); color: var(--deep-rose); }
+    .qty-value {
+      font-size: 13px;
+      font-weight: 600;
+      min-width: 18px;
+      text-align: center;
+    }
+    .cart-item-remove {
+      align-self: flex-start;
+      padding: 4px;
+      font-size: 14px;
+      color: var(--mid-gray);
+      transition: color var(--transition);
+    }
+    .cart-item-remove:hover { color: var(--deep-rose); }
+
+    /* Cart footer */
+    .cart-footer {
+      padding: 16px 20px 20px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+      background: var(--warm-white);
+    }
+    .cart-subtotal {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 15px;
+      margin-bottom: 14px;
+    }
+    .cart-subtotal-label { color: var(--mid-gray); }
+    .cart-subtotal-amount { font-weight: 700; font-size: 18px; color: var(--charcoal); }
+    .cart-checkout-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--dusty-rose);
+      color: #fff;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      transition: background var(--transition), transform var(--transition);
+    }
+    .cart-checkout-btn:hover { background: var(--deep-rose); transform: translateY(-1px); }
+    .cart-checkout-btn:active { transform: none; }
+    .cart-clear-btn {
+      width: 100%;
+      margin-top: 8px;
+      padding: 8px;
+      font-size: 13px;
+      color: var(--mid-gray);
+      border-radius: var(--radius);
+      transition: background var(--transition), color var(--transition);
+    }
+    .cart-clear-btn:hover { background: var(--blush); color: var(--deep-rose); }
+
+    /* ── Add to Cart button (modal) ────────────────────────────────────────── */
+    .modal-add-to-cart-btn {
+      width: 100%;
+      padding: 13px;
+      background: var(--dusty-rose);
+      color: #fff;
+      border-radius: var(--radius);
+      font-size: 15px;
+      font-weight: 600;
+      margin-top: 20px;
+      transition: background var(--transition), transform var(--transition);
+      letter-spacing: 0.02em;
+    }
+    .modal-add-to-cart-btn:hover { background: var(--deep-rose); transform: translateY(-1px); }
+    .modal-add-to-cart-btn:active { transform: none; }
+
+    /* "Added!" flash state */
+    .modal-add-to-cart-btn.added {
+      background: var(--sage);
+    }
+
     /* ── Footer ────────────────────────────────────────────────────────────── */
     footer {
       background: var(--charcoal);
@@ -670,8 +910,34 @@
         <option value="price-desc">Highest Price</option>
       </select>
     </div>
+
+    <button class="cart-btn" id="cart-btn" aria-label="Open cart">
+      <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+        <line x1="3" y1="6" x2="21" y2="6"/>
+        <path d="M16 10a4 4 0 0 1-8 0"/>
+      </svg>
+      <span class="cart-badge" id="cart-badge" style="display:none">0</span>
+    </button>
   </div>
 </header>
+
+<!-- Cart Drawer -->
+<div class="cart-drawer" id="cart-drawer" aria-label="Shopping cart" role="dialog">
+  <div class="cart-drawer-backdrop" id="cart-drawer-backdrop"></div>
+  <div class="cart-panel">
+    <div class="cart-header">
+      <h2 class="cart-heading">Your Cart</h2>
+      <button class="cart-close-btn" id="cart-close-btn" aria-label="Close cart">&#x2715;</button>
+    </div>
+    <div class="cart-items" id="cart-items">
+      <!-- rendered by JS -->
+    </div>
+    <div class="cart-footer" id="cart-footer">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+</div>
 
 <!-- Mobile filter drawer -->
 <div class="sidebar-drawer" id="sidebar-drawer">
@@ -743,7 +1009,8 @@
       <h2 class="modal-title" id="modal-title"></h2>
       <div class="modal-price" id="modal-price"></div>
       <div class="modal-tags" id="modal-tags"></div>
-      <hr class="modal-divider" />
+      <button class="modal-add-to-cart-btn" id="modal-add-to-cart-btn">Add to Cart</button>
+      <hr class="modal-divider" style="margin-top:20px;" />
       <div class="modal-desc-label">Description</div>
       <div class="modal-desc" id="modal-desc"></div>
     </div>
@@ -756,6 +1023,12 @@
 
 <script>
 // ── State ─────────────────────────────────────────────────────────────────────
+// cart items: [{ id, title, price, currency, image, quantity }]
+function loadCartFromStorage() {
+  try { return JSON.parse(localStorage.getItem('stickerco_cart') || '[]'); }
+  catch { return []; }
+}
+
 const state = {
   search: '',
   tag: '',
@@ -768,7 +1041,160 @@ const state = {
   loading: false,
   modal: null,
   galleryIndex: 0,
+  cart: loadCartFromStorage(),
+  cartOpen: false,
 };
+
+// ── Cart Logic ────────────────────────────────────────────────────────────────
+function saveCart() {
+  localStorage.setItem('stickerco_cart', JSON.stringify(state.cart));
+}
+
+function cartItemCount() {
+  return state.cart.reduce((sum, item) => sum + item.quantity, 0);
+}
+
+function cartSubtotal() {
+  return state.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+}
+
+function addToCart(product, triggerBtn) {
+  const existing = state.cart.find(i => i.id === product.id);
+  if (existing) {
+    existing.quantity++;
+  } else {
+    state.cart.push({
+      id:       product.id,
+      title:    product.title,
+      price:    product.price,
+      currency: product.currency,
+      image:    product.images[0] || '',
+      quantity: 1,
+    });
+  }
+  saveCart();
+  updateCartBadge();
+  renderCartDrawer();
+
+  // Brief "Added!" flash on the button
+  if (triggerBtn) {
+    triggerBtn.textContent = 'Added!';
+    triggerBtn.classList.add('added');
+    setTimeout(() => {
+      triggerBtn.textContent = 'Add to Cart';
+      triggerBtn.classList.remove('added');
+    }, 1200);
+  }
+}
+
+function removeFromCart(id) {
+  state.cart = state.cart.filter(i => i.id !== id);
+  saveCart();
+  updateCartBadge();
+  renderCartDrawer();
+}
+
+function setCartQty(id, qty) {
+  if (qty < 1) { removeFromCart(id); return; }
+  const item = state.cart.find(i => i.id === id);
+  if (item) item.quantity = qty;
+  saveCart();
+  updateCartBadge();
+  renderCartDrawer();
+}
+
+function clearCart() {
+  state.cart = [];
+  saveCart();
+  updateCartBadge();
+  renderCartDrawer();
+}
+
+function updateCartBadge() {
+  const badge = document.getElementById('cart-badge');
+  const count = cartItemCount();
+  if (count > 0) {
+    badge.textContent = count > 99 ? '99+' : count;
+    badge.style.display = 'block';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+function openCartDrawer() {
+  state.cartOpen = true;
+  document.getElementById('cart-drawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeCartDrawer() {
+  state.cartOpen = false;
+  document.getElementById('cart-drawer').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function renderCartDrawer() {
+  const itemsEl  = document.getElementById('cart-items');
+  const footerEl = document.getElementById('cart-footer');
+
+  if (state.cart.length === 0) {
+    itemsEl.innerHTML = `
+      <div class="cart-empty">
+        <svg width="56" height="56" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <p>Your cart is empty.<br>Start adding some stickers!</p>
+      </div>`;
+    footerEl.innerHTML = '';
+    return;
+  }
+
+  itemsEl.innerHTML = state.cart.map(item => `
+    <div class="cart-item" data-cart-item-id="${item.id}">
+      <img class="cart-item-img" src="${escHtml(item.image)}" alt="${escHtml(item.title)}" loading="lazy" />
+      <div class="cart-item-info">
+        <div class="cart-item-title">${escHtml(item.title)}</div>
+        <div class="cart-item-price">${formatPrice(item.price, item.currency)}</div>
+        <div class="qty-controls">
+          <button class="qty-btn qty-dec" data-id="${item.id}" aria-label="Decrease quantity">&#8722;</button>
+          <span class="qty-value">${item.quantity}</span>
+          <button class="qty-btn qty-inc" data-id="${item.id}" aria-label="Increase quantity">&#43;</button>
+        </div>
+      </div>
+      <button class="cart-item-remove" data-id="${item.id}" aria-label="Remove item">&#x2715;</button>
+    </div>
+  `).join('');
+
+  const subtotal = cartSubtotal();
+  const currency = state.cart[0].currency;
+  footerEl.innerHTML = `
+    <div class="cart-subtotal">
+      <span class="cart-subtotal-label">Subtotal (${cartItemCount()} item${cartItemCount() !== 1 ? 's' : ''})</span>
+      <span class="cart-subtotal-amount">${formatPrice(subtotal, currency)}</span>
+    </div>
+    <button class="cart-checkout-btn" id="cart-checkout-btn">Proceed to Checkout</button>
+    <button class="cart-clear-btn" id="cart-clear-btn">Clear cart</button>
+  `;
+
+  // Wire up qty + remove buttons
+  itemsEl.querySelectorAll('.qty-dec').forEach(btn => {
+    btn.onclick = () => setCartQty(parseInt(btn.dataset.id, 10), state.cart.find(i => i.id === parseInt(btn.dataset.id, 10))?.quantity - 1);
+  });
+  itemsEl.querySelectorAll('.qty-inc').forEach(btn => {
+    btn.onclick = () => setCartQty(parseInt(btn.dataset.id, 10), state.cart.find(i => i.id === parseInt(btn.dataset.id, 10))?.quantity + 1);
+  });
+  itemsEl.querySelectorAll('.cart-item-remove').forEach(btn => {
+    btn.onclick = () => removeFromCart(parseInt(btn.dataset.id, 10));
+  });
+
+  document.getElementById('cart-clear-btn').onclick = clearCart;
+  // Checkout button: placeholder — Stripe integration will go here
+  document.getElementById('cart-checkout-btn').onclick = () => {
+    alert('Checkout coming soon!');
+  };
+}
 
 // ── DOM refs ──────────────────────────────────────────────────────────────────
 const grid         = document.getElementById('product-grid');
@@ -999,6 +1425,10 @@ async function openModal(id) {
     chip.onclick = () => { closeModal(); setTag(chip.dataset.tag); };
   });
 
+  // Modal Add to Cart
+  const modalAtcBtn = document.getElementById('modal-add-to-cart-btn');
+  modalAtcBtn.onclick = () => addToCart(p, modalAtcBtn);
+
   renderGallery();
   modalBg.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -1040,6 +1470,11 @@ modalClose.onclick = closeModal;
 modalBg.addEventListener('click', e => { if (e.target === modalBg) closeModal(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
+// ── Cart drawer events ────────────────────────────────────────────────────────
+document.getElementById('cart-btn').onclick           = openCartDrawer;
+document.getElementById('cart-close-btn').onclick     = closeCartDrawer;
+document.getElementById('cart-drawer-backdrop').onclick = closeCartDrawer;
+
 // ── Mobile drawer ─────────────────────────────────────────────────────────────
 mobileFilterBtn.onclick  = () => drawer.classList.add('open');
 drawerBackdrop.onclick   = closeDrawer;
@@ -1056,6 +1491,7 @@ function escHtml(str) {
 }
 
 // ── Init ──────────────────────────────────────────────────────────────────────
+updateCartBadge();   // restore badge count from localStorage on first load
 Promise.all([fetchTags(), fetchProducts()]);
 </script>
 
