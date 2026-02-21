@@ -53,6 +53,33 @@
       letter-spacing: 0.04em;
     }
 
+    /* ── Hero Section ───────────────────────────────────────────────────────── */
+    .hero {
+      width: 100%;
+      background: var(--warm-white);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .hero-image img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    /* Responsive hero height */
+    @media (max-width: 768px) {
+      .hero-image {
+        max-height: 50vh;
+        overflow: hidden;
+      }
+    }
+
     /* ── Header / Nav ──────────────────────────────────────────────────────── */
     .site-header {
       background: var(--warm-white);
@@ -921,6 +948,13 @@
     </button>
   </div>
 </header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-image">
+    <img src="cover.png" alt="Featured sticker collection" />
+  </div>
+</section>
 
 <!-- Cart Drawer -->
 <div class="cart-drawer" id="cart-drawer" aria-label="Shopping cart" role="dialog">
